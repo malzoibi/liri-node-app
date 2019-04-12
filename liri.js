@@ -48,6 +48,11 @@ function command(userInput){
 //Spotify Search
 function spotifyThisSong(){
   console.log("Searching for...");
+
+if(!userQuery){
+  userQuery = "The Sign Ace of Base"
+};
+
   spotify.search({ 
     type: 'track', 
     query: userQuery,
@@ -68,7 +73,38 @@ function spotifyThisSong(){
   }
 
   //Movie Search 
-  function movieThis(){console.log("Searching for...");
-  }
+  function movieThis(){
+    console.log("Searching for...");
 
-  command(userInput); 
+    if(!userQuery){
+      userQuery = "Mr.Nobody"
+    }
+
+    var queryURL = "http://www.omdbapi.com/?t=" + userQuery + "&apikey=86fe999c";
+
+    axios.get(queryURL).then(
+      function(response){
+        console.log('--------------------------------------------------')
+        console.log("Title of the movie: " + response.data.Title);
+        console.log("Release Date: " + response.data.Year);
+        console.log("IMDB Rating: " + response.data.imdbRating);
+        //console.log("Rotten Tomatoes Rating: " + response.data.Ratings.value);
+        console.log("Country of Production: " + response.data.Country);
+        console.log("Language: " + response.data.Language);
+        console.log("Plot of the movie: " + response.data.Plot);
+        console.log("Actors in the movie: " + response.data.Actors);
+        console.log('--------------------------------------------------')
+      }
+    );}
+  
+  
+
+
+
+
+
+command(userInput); 
+
+
+    
+  
